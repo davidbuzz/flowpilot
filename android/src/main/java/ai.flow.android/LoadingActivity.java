@@ -78,7 +78,7 @@ public class LoadingActivity extends AppCompatActivity {
                 while (!checkPermissions()){
                     // show toast every 4 seconds
                     if (i%40 == 0)
-                        Toast.makeText(getApplicationContext(), "Flowpilot needs all required permissions to be granted to work.", Toast.LENGTH_LONG).show();
+                        runOnUiThread(() -> Toast.makeText(getApplicationContext(), "Flowpilot needs all required permissions to be granted to work.", Toast.LENGTH_LONG).show());
                     try {
                         Thread.sleep(100);
                     } catch (InterruptedException e) {
@@ -131,7 +131,7 @@ public class LoadingActivity extends AppCompatActivity {
             if (Environment.isExternalStorageManager())
                 return;
             try {
-                Toast.makeText(this, "grant external storage access to flowpilot.", Toast.LENGTH_LONG).show();
+                runOnUiThread(() -> Toast.makeText(this, "grant external storage access to flowpilot.", Toast.LENGTH_LONG).show());
                 Intent intent = new Intent(Settings.ACTION_MANAGE_APP_ALL_FILES_ACCESS_PERMISSION);
                 intent.addCategory("android.intent.category.DEFAULT");
                 intent.setData(Uri.parse(String.format("package:%s",getApplicationContext().getPackageName())));
